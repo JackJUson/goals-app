@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { FC } from 'react';
 import { Goal } from '@/types/goal';
 
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -13,19 +12,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 interface GoalListProps {
   goals: Goal[];
-  onEdit: (goal: Goal) => void; // Ensure this line is added
+  onEdit: (goal: Goal) => void;
   onDelete: (id: string) => Promise<void>;
 }
 
@@ -34,7 +24,7 @@ const GoalList: FC<GoalListProps> = ({ goals }) => {
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-6'>
       {goals.map((goal) => (
         <Card
-          className='shadow-lg hover:scale-105 hover:ease-in-out duration-200'
+          className='shadow-lg hover:scale-105 hover:ease-in-out duration-200 cursor-pointer'
           key={goal.createdAt?.toString()}
         >
           <CardHeader>
