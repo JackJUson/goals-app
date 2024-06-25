@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Goal } from '@/types/goal';
 
 import {
@@ -13,13 +13,28 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-interface GoalListProps {
-  goals: Goal[];
-  onEdit: (goal: Goal) => void;
-  onDelete: (id: string) => Promise<void>;
-}
+// interface GoalListProps {
+//   goals: Goal[];
+//   // onEdit: (goal: Goal) => void;
+//   // onDelete: (id: string) => Promise<void>;
+// }
 
-const GoalList: FC<GoalListProps> = ({ goals }) => {
+const GoalList = () => {
+  const [goals, setGoals] = useState<Goal[]>([]);
+  // const [editingGoal, setEditingGoal] = useState<
+  //   Partial<Omit<Goal, 'createdAt' | 'updatedAt'>> | undefined
+  // >(undefined);
+
+  useEffect(() => {
+    fetchGoals();
+  }, []);
+
+  const fetchGoals = async () => {
+    const response = await fetch('/api/goals');
+    const data = await response.json();
+    setGoals(data);
+  };
+
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-6'>
       {goals.map((goal) => (

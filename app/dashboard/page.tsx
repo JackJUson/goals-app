@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/ModeToggle';
@@ -9,35 +9,36 @@ import GoalList from '@/components/GoalList';
 import WeeklyTable from '@/components/WeeklyTable';
 import { Goal } from '@/types/goal';
 import { AlertDialogDemo } from '@/components/Modal';
+import DemoPage from '@/components/task/page';
 
 export default function Dashboard() {
-  const [goals, setGoals] = useState([]);
-  const [editingGoal, setEditingGoal] = useState<
-    Partial<Omit<Goal, 'createdAt' | 'updatedAt'>> | undefined
-  >(undefined);
+  // const [goals, setGoals] = useState([]);
+  // // const [editingGoal, setEditingGoal] = useState<
+  // //   Partial<Omit<Goal, 'createdAt' | 'updatedAt'>> | undefined
+  // // >(undefined);
 
-  useEffect(() => {
-    fetchGoals();
-  }, []);
+  // useEffect(() => {
+  //   fetchGoals();
+  // }, []);
 
-  const fetchGoals = async () => {
-    const response = await fetch('/api/goals');
-    const data = await response.json();
-    setGoals(data);
-  };
+  // const fetchGoals = async () => {
+  //   const response = await fetch('/api/goals');
+  //   const data = await response.json();
+  //   setGoals(data);
+  // };
 
-  const handleDeleteGoal = async (id: string) => {
-    await fetch(`/api/goals`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    });
-    fetchGoals();
-  };
+  // const handleDeleteGoal = async (id: string) => {
+  //   await fetch(`/api/goals`, {
+  //     method: 'DELETE',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ id }),
+  //   });
+  //   fetchGoals();
+  // };
 
-  const handleEditGoal = (goal: Goal) => {
-    setEditingGoal(goal);
-  };
+  // const handleEditGoal = (goal: Goal) => {
+  //   setEditingGoal(goal);
+  // };
 
   return (
     <div className='max-w-5xl mx-auto min-h-screen'>
@@ -60,15 +61,16 @@ export default function Dashboard() {
           &nbsp;12 Week Goals
         </h2>
         <div className='w-full flex justify-center items-center'>
-          <GoalList goals={goals} onEdit={handleEditGoal} onDelete={handleDeleteGoal} />
+          <GoalList />
         </div>
         <br />
         <br />
         <h2 className='scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0'>
           &nbsp;Tasks
         </h2>
+        <DemoPage />
         {[...Array(12)].map((_, index) => (
-          <WeeklyTable key={index} weekNumber={index + 1} goals={goals} />
+          <WeeklyTable key={index} weekNumber={index + 1} goals={[]} />
         ))}
       </div>
     </div>
