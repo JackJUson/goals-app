@@ -1,33 +1,73 @@
-import { Payment, columns } from './columns';
+import { Types } from 'mongoose';
+import { columns } from './columns';
 import { DataTable } from './data-table';
+import { Task } from '@/types/task';
 
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
+async function getDummyTasks(): Promise<Task[]> {
   return [
     {
-      id: '728ed52f',
-      amount: 100,
-      status: 'pending',
-      email: '1m@example.com',
+      _id: new Types.ObjectId(),
+      goalId: new Types.ObjectId(),
+      weekNumber: 1,
+      name: "Task One",
+      frequency: "daily",
+      dueDate: new Date(),
+      days: {
+        Mon: true,
+        Tue: true,
+        Wed: true,
+        Thu: true,
+        Fri: true,
+        Sat: false,
+        Sun: false,
+      },
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
-      id: '728edx2f',
-      amount: 200,
-      status: 'pending',
-      email: '2m@example.com',
+      _id: new Types.ObjectId(),
+      goalId: new Types.ObjectId(),
+      weekNumber: 2,
+      name: "Task Two",
+      frequency: "3",
+      dueDate: new Date(),
+      days: {
+        Mon: false,
+        Tue: true,
+        Wed: false,
+        Thu: true,
+        Fri: false,
+        Sat: true,
+        Sun: false,
+      },
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
-      id: '728ed92f',
-      amount: 300,
-      status: 'pending',
-      email: '3m@example.com',
+      _id: new Types.ObjectId(),
+      goalId: new Types.ObjectId(),
+      weekNumber: 3,
+      name: "Task Three",
+      frequency: "1",
+      dueDate: new Date(),
+      days: {
+        Mon: false,
+        Tue: false,
+        Wed: false,
+        Thu: false,
+        Fri: true,
+        Sat: false,
+        Sun: false,
+      },
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
-    // ...
+    // Add more tasks as needed...
   ];
 }
 
 export default async function DemoPage() {
-  const data = await getData();
+  const data = await getDummyTasks();
 
   return (
     <div className='container pr-0 pl-0 py-10'>

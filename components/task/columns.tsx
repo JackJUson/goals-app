@@ -21,17 +21,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Task } from '@/types/task';
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-  id: string;
-  amount: number;
-  status: 'pending' | 'processing' | 'success' | 'failed';
-  email: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Task>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -78,12 +70,9 @@ export const columns: ColumnDef<Payment>[] = [
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
-              <SelectItem value='apple'>Apple</SelectItem>
-              <SelectItem value='banana'>Banana</SelectItem>
-              <SelectItem value='blueberry'>Blueberry</SelectItem>
-              <SelectItem value='grapes'>Grapes</SelectItem>
-              <SelectItem value='pineapple'>Pineapple</SelectItem>
+              <SelectLabel>Goals</SelectLabel>
+              <SelectItem value='goal 1'>Goal 1</SelectItem>
+              <SelectItem value='goal 2'>Goal 2</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
